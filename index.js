@@ -1,3 +1,8 @@
+        //Getting Buttons to add event listener 
+        let savebtn = document.getElementById('save')
+        let clearbtn = document.getElementById('clear')
+
+
 
         // Declaring Variables
         let tb = document.getElementById('tableb')
@@ -39,24 +44,27 @@
 
         //Function for manipulating data in Table
         function manipulateTable() {
-            itemarrayStr = localStorage.getItem('todo')
+            let itemarrayStr = localStorage.getItem('todo')
             itemarray = JSON.parse(itemarrayStr)
             htmlToInsert = ""
+            if (itemarray!==null) {
+                
+                
+                            itemarray.forEach((elements, index) => {
+                
+                                htmlToInsert += `
+                                    <tr>
+                                        <th scope="row">${index + 1}</th>
+                                        <td>${elements[0]}</td>
+                                        <td>${elements[1]}</td>
+                                        <td><button id="delete" class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td> 
+                                        </tr>
+                                        `
+                                // let tb = document.getElementById('tableb')
+                                tb.innerHTML = htmlToInsert
+                            });
+            }
 
-
-            itemarray.forEach((elements, index) => {
-
-                htmlToInsert += `
-                    <tr>
-                        <th scope="row">${index + 1}</th>
-                        <td>${elements[0]}</td>
-                        <td>${elements[1]}</td>
-                        <td><button id="delete" class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td> 
-                        </tr>
-                        `
-                // let tb = document.getElementById('tableb')
-                tb.innerHTML = htmlToInsert
-            });
 
 
         }
@@ -87,5 +95,9 @@
         }
         
         //Manipulating table on load
-        document.addEventListener('onload', manipulateTable())
+        manipulateTable()
         
+        //Adding event listeners to buttons
+
+        savebtn.addEventListener('click', update)
+        clearbtn.addEventListener('click', clearAll)
