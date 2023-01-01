@@ -16,7 +16,7 @@ function update() {
     let titlee = document.getElementById('title').value
     let descc = document.getElementById('desc').value
     //Setting Values to localStorage
-    if (titlee !== "" && descc !== "") {
+    if (titlee !== "") {
 
         let titlee = document.getElementById('title').value
         let descc = document.getElementById('desc').value
